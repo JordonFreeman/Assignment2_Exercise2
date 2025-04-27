@@ -1,0 +1,25 @@
+﻿@model List<OrderManagement.Web.Models.Item>
+@{
+    ViewBag.Title = "Best Selling Items";
+}
+
+<h2>Best Selling Items</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>Item Name</th>
+        <th>Size</th>
+        <th>Unit Price</th>
+        <th>Stock</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ItemName</td>
+            <td>@item.Size</td>
+            <td>@String.Format("{0:C}", item.UnitPrice)</td>
+            <td>@item.StockQuantity</td>
+        </tr>
+    }
+</table>

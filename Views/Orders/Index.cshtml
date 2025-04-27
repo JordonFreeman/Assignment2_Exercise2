@@ -1,0 +1,33 @@
+﻿@model IEnumerable<OrderManagement.Web.Models.Order>
+
+<h2>Orders</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <tr>
+        <th>Order #</th>
+        <th>Date</th>
+        <th>Agent</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var order in Model)
+    {
+        <tr>
+            <td>@order.OrderID</td>
+            <td>@order.OrderDate.ToString("yyyy-MM-dd")</td>
+            <td>@order.Agent.AgentName</td>
+            <td>@String.Format("{0:C}", order.TotalAmount)</td>
+            <td>@order.Status</td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = order.OrderID }, new { @class = "btn btn-info btn-sm" })
+                @Html.ActionLink("Print", "Print", new { id = order.OrderID }, new { @class = "btn btn-default btn-sm" })
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,35 @@
+﻿@model List<OrderManagement.Web.Models.Item>
+@{
+    ViewBag.Title = "Items";
+}
+
+<h2>Item Management</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <tr>
+        <th>Item Name</th>
+        <th>Size</th>
+        <th>Unit Price</th>
+        <th>Stock</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ItemName</td>
+            <td>@item.Size</td>
+            <td>@String.Format("{0:C}", item.UnitPrice)</td>
+            <td>@item.StockQuantity</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
+            </td>
+        </tr>
+    }
+</table>

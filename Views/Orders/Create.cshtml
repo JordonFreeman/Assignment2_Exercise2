@@ -1,0 +1,62 @@
+﻿@model OrderManagement.Web.Models.Order
+@{
+    ViewBag.Title = "Create Order";
+}
+
+<h2>Create New Order</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <label>Agent</label>
+        @Html.DropDownList("AgentID", ViewBag.Agents as SelectList, "-- Select Agent --", new { @class = "form-control" })
+    </div>
+
+    <h3>Order Items</h3>
+    <div id="orderItems">
+        <div class="row order-item">
+            <div class="col-md-5">
+                <select name="itemIds" class="form-control item-select">
+                    <option value="">-- Select Item --</option>
+                    @foreach (var item in new SelectList((IEnumerable<OrderManagement.Web.Models.Item>)ViewBag.Items, "ItemID", "ItemName"))
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input type="number" name="quantities" class="form-control" value="1" min="1" />
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger remove-item">Remove</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="button" id="addMoreBtn" class="btn btn-success">Add More Items</button>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Order</button>
+}
+
+@section Scripts {
+    <script>
+        $(function() {
+            // Add more items
+            $("#addMoreBtn").click(function() {
+                var newRow = $(".order-item:first").clone();
+                newRow.find("select").val("");
+                newRow.find("input[type=number]").val(1);
+                $("#orderItems").append(newRow);
+            });
+
+            // Remove item
+            $(document).on("click", ".remove-item", function() {
+                if ($(".order-item").length > 1) {
+                    $(this).closest(".order-item").remove();
+                }
+            });
+        });
+    </script>
+}

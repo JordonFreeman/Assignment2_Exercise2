@@ -1,0 +1,57 @@
+﻿@model OrderManagement.Web.Models.Order
+@{
+    ViewBag.Title = "Print Order";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3>Order #@Model.OrderID</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Agent:</strong> @Model.Agent.AgentName</p>
+                            <p><strong>Address:</strong> @Model.Agent.Address</p>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p><strong>Date:</strong> @Model.OrderDate.ToString("yyyy-MM-dd")</p>
+                            <p><strong>Status:</strong> @Model.Status</p>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                        </tr>
+                        @foreach (var detail in Model.OrderDetails)
+                        {
+                            <tr>
+                                <td>@detail.Item.ItemName</td>
+                                <td>@detail.Quantity</td>
+                                <td>@String.Format("{0:C}", detail.UnitAmount)</td>
+                                <td>@String.Format("{0:C}", detail.TotalAmount)</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="3" class="text-right"><strong>Total:</strong></td>
+                            <td><strong>@String.Format("{0:C}", Model.TotalAmount)</strong></td>
+                        </tr>
+                    </table>
+
+                    <div class="text-center">
+                        <button class="btn btn-primary" onclick="window.print()">Print</button>
+                        @Html.ActionLink("Back to Orders", "Index", null, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
