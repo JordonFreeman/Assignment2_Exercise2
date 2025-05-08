@@ -1,33 +1,91 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Order Management System</h2>
+            <p class="lead">Welcome to your dashboard</p>
+        </div>
+    </div>
 
     <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+        <div class="col-md-12">
+            <!-- Navigation tabs -->
+            <ul class="nav nav-tabs" id="navTabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" href="@Url.Action("Index", "Home")">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Orders")">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Items")">Items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Agents")">Agents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Reports")">Reports</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</main>
+
+    <!-- Dashboard content -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Recent Orders</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- You can load actual data here -->
+                    <p>Recent order summary will appear here</p>
+                    <a href="@Url.Action("Index", "Orders")" class="btn btn-primary btn-sm">View All Orders</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Top Selling Items</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- You can load actual data here -->
+                    <p>Top selling items will appear here</p>
+                    <a href="@Url.Action("Index", "Items")" class="btn btn-primary btn-sm">View All Items</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Agent Performance</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- You can load actual data here -->
+                    <p>Agent performance summary will appear here</p>
+                    <a href="@Url.Action("Index", "Agents")" class="btn btn-primary btn-sm">View All Agents</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sales Reports</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- You can load actual data here -->
+                    <p>Sales summary will appear here</p>
+                    <a href="@Url.Action("Index", "Reports")" class="btn btn-primary btn-sm">View All Reports</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

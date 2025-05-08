@@ -255,7 +255,12 @@
     <Content Include="Views\Items\Delete.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Reports\BestSellingItems.cshtml" />
-    <Content Include="Views\Reports\ItemsByAgent.cshtml" />
+    <Content Include="Views\Agents\Index.cshtml" />
+    <Content Include="Views\Agents\Create.cshtml" />
+    <Content Include="Views\Agents\Edit.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\Print.cshtml" />
+    <Content Include="Views\Reports\OrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

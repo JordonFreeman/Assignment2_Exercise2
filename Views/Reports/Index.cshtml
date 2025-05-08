@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Reports</h2>
+
+            <!-- Navigation tabs -->
+            <ul class="nav nav-tabs" id="navTabs">
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li><a href="@Url.Action("Index", "Orders")">Orders</a></li>
+                <li><a href="@Url.Action("Index", "Items")">Items</a></li>
+                <li><a href="@Url.Action("Index", "Agents")">Agents</a></li>
+                <li class="active"><a href="@Url.Action("Index", "Reports")">Reports</a></li>
+            </ul>
+
+            <div class="panel panel-primary" style="margin-top:20px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Available Reports</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">Best Selling Items</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <p>View the most popular items based on sales volume.</p>
+                                    <a href="@Url.Action("BestItems", "Reports")" class="btn btn-primary">View Report</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="row" style="margin-top:20px;">
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">Order Details</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <p>View complete details for a specific order.</p>
+                                    <a href="@Url.Action("OrderDetails", "Reports")" class="btn btn-primary">View Report</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
