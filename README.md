@@ -1,2 +1,2 @@
 # OrderManagement.Web
-# To begin the access, add /Login/Index to the localhost and enter any credentials to be directed into the database
+# To begin the app press the run button, when logging in use username(admin) and password(admin123)
