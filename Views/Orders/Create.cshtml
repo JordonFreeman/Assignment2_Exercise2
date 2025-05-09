@@ -1,61 +1,85 @@
 ﻿@model OrderManagement.Web.Models.Order
 @{
     ViewBag.Title = "Create Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Create New Order</h2>
 
 @using (Html.BeginForm())
 {
-    <div class="form-group">
-        <label>Agent</label>
-        @Html.DropDownList("AgentID", ViewBag.Agents as SelectList, "-- Select Agent --", new { @class = "form-control" })
-    </div>
+    @Html.AntiForgeryToken() @* Make sure this is present *@
 
-    <h3>Order Items</h3>
-    <div id="orderItems">
-        <div class="row order-item">
-            <div class="col-md-5">
-                <select name="itemIds" class="form-control item-select">
-                    <option value="">-- Select Item --</option>
-                    @foreach (var item in new SelectList((IEnumerable<OrderManagement.Web.Models.Item>)ViewBag.Items, "ItemID", "ItemName"))
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                    }
-                </select>
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AgentID, "Agent", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AgentID", (SelectList)ViewBag.Agents, "-- Select Agent --", new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.AgentID, "", new { @class = "text-danger" })
             </div>
-            <div class="col-md-2">
-                <input type="number" name="quantities" class="form-control" value="1" min="1" />
+        </div>
+
+        <h3>Order Items</h3>
+        <div id="orderItems">
+            <div class="row order-item">
+                <div class="col-md-5">
+                    @Html.DropDownList("itemIds", (SelectList)ViewBag.Items, "-- Select Item --", new { @class = "form-control item-select", required = "required" })
+                </div>
+                <div class="col-md-2">
+                    <input type="number" name="quantities" class="form-control" value="1" min="1" required />
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-danger remove-item">Remove</button>
+                </div>
             </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-danger remove-item">Remove</button>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="margin-top: 10px;">
+                <button type="button" id="addItem" class="btn btn-success">Add Item</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="margin-top: 20px;">
+                <input type="submit" value="Create Order" class="btn btn-primary" />
+                <a href="@Url.Action("Index", "Orders")" class="btn btn-default">Back to List</a>
             </div>
         </div>
     </div>
-
-    <div class="form-group">
-        <button type="button" id="addMoreBtn" class="btn btn-success">Add More Items</button>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Create Order</button>
 }
 
 @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
-        $(function() {
-            // Add more items
-            $("#addMoreBtn").click(function() {
+        $(document).ready(function () {
+            // Add new item row
+            $("#addItem").click(function () {
                 var newRow = $(".order-item:first").clone();
-                newRow.find("select").val("");
+                newRow.find("select.item-select").val("");
                 newRow.find("input[type=number]").val(1);
                 $("#orderItems").append(newRow);
             });
 
-            // Remove item
-            $(document).on("click", ".remove-item", function() {
-                if ($(".order-item").length > 1) {
+            // Remove item row
+            $("#orderItems").on("click", ".remove-item", function () {
+                if ($("#orderItems .order-item").length > 1) {
                     $(this).closest(".order-item").remove();
+                } else {
+                    alert("You must have at least one item.");
                 }
+            });
+
+            // Prevent default form submission to ensure validation
+            $("form").submit(function (e) {
+                if (!$(this).valid()) {
+                    e.preventDefault();
+                    return false;
+                }
+                return true;
             });
         });
     </script>
